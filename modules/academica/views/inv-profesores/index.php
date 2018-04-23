@@ -45,7 +45,7 @@ $this->params['breadcrumbs'][] = $this->title;
               'filter' => yii\helpers\ArrayHelper::map(app\modules\academica\models\CatPlanteles::find()->orderBy('nombre')->asArray()->all(),'id','nombre')
             ],
             [
-              'attribute'=>'id_plantel',
+              'attribute'=>'id_academia',
               'value' => 'catAcademias.nombre',
               'filter' => yii\helpers\ArrayHelper::map(app\modules\academica\models\CatAcademias::find()->orderBy('nombre')->asArray()->all(),'id','nombre')
             ],
@@ -77,7 +77,7 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'updated_at',
             // 'updated_by',
 
-             [
+            /* [
              'class' => 'app\components\CustomActionColumn',
       'template' => '{view} {delete}',
       'buttons' => [
@@ -88,7 +88,22 @@ $this->params['breadcrumbs'][] = $this->title;
                 return ((Yii::$app->user->can("/academica/inv-prof/delete")) ? Html::a('<span class="glyphicon glyphicon-remove"></span>', $url, ['title' => Yii::t('app', 'Delete'), 'data' => ['confirm' => Yii::t('app', 'Are you sure you want to delete this item?'),'method' => 'post'],]) : '');
             }
       ],
-            ],
+            ],*/
+
+              [ 'attribute' => 'Modificar',
+              'filter' =>false,
+              'format' => 'raw', 'value' => function($data){
+            
+
+             
+         
+                    return (Html::a('<center><span class="glyphicon glyphicon-share"><bR>Modificar</span><center>', ['/academica/inv-profesores/view', 'id' =>$data->id, 'active'=>1], ['title' => 'Ver Contenido']));
+                 
+
+            
+              
+            }
+              ],
         ],
     ]); ?>
 <?php Pjax::end(); ?></div>

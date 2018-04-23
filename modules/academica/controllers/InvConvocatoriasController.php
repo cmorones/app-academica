@@ -3,18 +3,16 @@
 namespace app\modules\academica\controllers;
 
 use Yii;
-use app\modules\academica\models\InvDatosprof;
-use app\modules\academica\models\InvDatosprofSearch;
+use app\modules\academica\models\InvConvocatorias;
+use app\modules\academica\models\InvConvocatoriasSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use yii\db\Expression;
-use yii\helpers\Url;
 
 /**
- * InvDatosprofController implements the CRUD actions for InvDatosprof model.
+ * InvConvocatoriasController implements the CRUD actions for InvConvocatorias model.
  */
-class InvDatosprofController extends Controller
+class InvConvocatoriasController extends Controller
 {
     /**
      * @inheritdoc
@@ -32,12 +30,12 @@ class InvDatosprofController extends Controller
     }
 
     /**
-     * Lists all InvDatosprof models.
+     * Lists all InvConvocatorias models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new InvDatosprofSearch();
+        $searchModel = new InvConvocatoriasSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -47,7 +45,7 @@ class InvDatosprofController extends Controller
     }
 
     /**
-     * Displays a single InvDatosprof model.
+     * Displays a single InvConvocatorias model.
      * @param integer $id
      * @return mixed
      */
@@ -59,76 +57,44 @@ class InvDatosprofController extends Controller
     }
 
     /**
-     * Creates a new InvDatosprof model.
+     * Creates a new InvConvocatorias model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate($id)
+    public function actionCreate()
     {
-        $model = new InvDatosprof();
+        $model = new InvConvocatorias();
 
-        if ($model->load(Yii::$app->request->post())) {
-
-            $model->id_prof=$id;
-            $model->created_by= Yii::$app->user->identity->user_id;
-            $model->created_at = new Expression('NOW()');
-          
-           
-            if (!$model->save()) {
-                echo "<pre>";
-                print_r($model->getErrors());
-                exit;
-                # code...
-            }
-
-        
-
-               return $this->redirect(Url::to(['/academica/inv-profesores/view', 'id' => $model->id_prof,'active' => 2, '#' => 'docs']));
-
-
-
-           // return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->id]);
         } else {
-            return $this->renderAjax('create', [
+            return $this->render('create', [
                 'model' => $model,
             ]);
         }
     }
 
     /**
-     * Updates an existing InvDatosprof model.
+     * Updates an existing InvConvocatorias model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
      */
-      
-    public function actionUpdate($id,$ide)
+    public function actionUpdate($id)
     {
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-
-            $model->updated_at = new Expression('NOW()');
-            $model->updated_by= Yii::$app->user->identity->user_id;
-             if (!$model->save()) {
-                echo "<pre>";
-                print_r($model->getErrors());
-                exit;
-                # code...
-            }
-
-               return $this->redirect(Url::to(['/academica/inv-profesores/view', 'id' => $model->id_prof,'active' => 2, '#' => 'docs']));
-            // return $this->redirect(['/soporte/inv-equipos/view', 'id' => $ide, '#' =>'telecom']);
-            //return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['view', 'id' => $model->id]);
         } else {
-            return $this->renderAjax('update', [
+            return $this->render('update', [
                 'model' => $model,
             ]);
         }
     }
 
     /**
-     * Deletes an existing InvDatosprof model.
+     * Deletes an existing InvConvocatorias model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -141,15 +107,15 @@ class InvDatosprofController extends Controller
     }
 
     /**
-     * Finds the InvDatosprof model based on its primary key value.
+     * Finds the InvConvocatorias model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return InvDatosprof the loaded model
+     * @return InvConvocatorias the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = InvDatosprof::findOne($id)) !== null) {
+        if (($model = InvConvocatorias::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

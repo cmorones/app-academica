@@ -1,6 +1,8 @@
 
 <?php
 use yii\helpers\Html; 
+use yii\bootstrap\Modal;
+use yii\helpers\Url;
 //$adminUser = array_keys(\Yii::$app->authManager->getRolesByUser(Yii::$app->user->getId()));
 ?>
 
@@ -16,7 +18,9 @@ use yii\helpers\Html;
 
 	
 
-			<?= Html::a('<i class="fa fa-pencil-square-o"></i> '.Yii::t('app', 'Agregar'), ['/academica/inv-domicilios/create', 'id' => $model->id, 'tab' => 'guardians'], ['class' => 'btn btn-primary btn-sm', 'id' => 'update-data']) ?>
+			<?//= Html::a('<i class="fa fa-pencil-square-o"></i> '.Yii::t('app', 'Agregar'), ['/academica/inv-domicilios/create', 'id' => $model->id, 'tab' => 'guardians'], ['class' => 'btn btn-primary btn-sm', 'id' => 'update-data']) ?>
+
+			 <?= Html::button('Agregar', ['value'=>Url::to(['/academica/inv-domicilios/create', 'id'=>$model->id]),'class' => 'btn btn-success','id'=>'modalButton2']) ?>
 		<?php
 //	}
 	?>
@@ -57,6 +61,7 @@ $i=1;
 foreach ($dom as $value) {
 
 ?>
+<hr>
 <div class="row">
 <div class="col-md-12 col-sm-12 col-xs-12">
 		<div class="col-md-3 col-sm-3 col-xs-6 edusec-profile-label edusecArLangCss"><strong>Domicilio #:</strong></div>
@@ -104,6 +109,7 @@ foreach ($dom as $value) {
 
 
 </div>
+<hr>
 
 <?
 $i++; 
@@ -123,5 +129,17 @@ $i++;
 <?php
  } ?>
 	
+	       <?php
+      Modal::begin([
+       // 'header'=>'<h4>Form</h4',
+        'id'=>'modal2',
+        'size'=>'modal2-lg',
+        ]);
+
+      echo "<div id='modalContent2'></div>";
+
+      Modal::end();
+
+    ?>
 
 </div> <!---Main Row Div--->

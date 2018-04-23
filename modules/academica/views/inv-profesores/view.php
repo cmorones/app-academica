@@ -6,7 +6,38 @@ use yii\helpers\Url;
 use yii\helpers\ArrayHelper;
 use dosamigos\switchinput\SwitchRadio;
 
-$count3=0;
+
+if ($active==1){
+  $muestra1 ='active';
+  $muestra2 ='';
+  $muestra3 = '';
+  $muestra4 = '';
+
+}
+
+if ($active==2){
+  $muestra1 ='';
+  $muestra2 ='active';
+  $muestra3 = '';
+  $muestra4 = '';
+  
+  
+
+}
+
+if ($active==3){
+  $muestra1 ='';
+  $muestra2 ='';
+  $muestra3 = 'active';
+  $muestra4 = '';
+}
+
+if ($active==4){
+  $muestra1 ='';
+  $muestra2 ='';
+  $muestra3 = '';
+  $muestra4 = 'active';
+}
 
 //use app\assets_b\EduSecUserProfile;
 //EduSecUserProfile::register($this);
@@ -33,7 +64,7 @@ $this->params['breadcrumbs'][] = $this->title;*/
         <i class="fa fa-user"></i>Información de profesores del IEMS
         <div class="<?= (Yii::$app->language == 'ar') ? 'pull-left' : 'pull-right'?>">
 
-            <?= Html::a('<i class="fa fa-file-pdf-o"></i> '.Yii::t('app', 'Regresar'), ['/soporte/inv-equipos'], ['class' => 'btn-sm btn btn-warning', 'id' => 'export-pdf']) ?>
+            <?= Html::a('<i class="fa fa-file-pdf-o"></i> '.Yii::t('app', 'Regresar'), ['/academica/inv-profesores'], ['class' => 'btn-sm btn btn-warning', 'id' => 'export-pdf']) ?>
   
         </div>
     </h2>
@@ -101,20 +132,20 @@ $this->params['breadcrumbs'][] = $this->title;*/
         </div></td>
             </tr>
 
-             <tr>
-                <th>Info Sistema Operativo</th>
+              <tr>
+                <th>Domicilio</th>
                 <td><div style="right: 10px; text-align:right" id="rating_2" data-hash="0xf3b0f0979bfa741f264e31acb590ac8662e7616b6869078b90420c6f7908a053" data-area="39,,70,">
             
               <?php
-            if ($count2<>0) {
+            if ($count<>0) {
             ?>
-            <a title="Mark this example as good" href="#" class="rating-up btn btn-success glyphicon glyphicon-thumbs-up" data-id="rating_2"></a>
+               <button class="btn btn-icon waves-effect waves-light btn-success m-b-5"> <i class="fa fa-thumbs-o-up"></i> </button>
             <?php
                 # code...
             } else {
             ?>
 
-            <a title="Mark this example as bad" href="#" class="rating-down btn btn-danger glyphicon glyphicon-thumbs-down" data-id="rating_2"></a>
+           <button class="btn btn-icon waves-effect waves-light btn-danger m-b-5"> <i class="fa fa-thumbs-o-down"></i> </button>
 
             <?php
               }
@@ -122,20 +153,20 @@ $this->params['breadcrumbs'][] = $this->title;*/
         </div></td>
             </tr>
 
-               <tr>
-                <th>Info Software Instalado</th>
+              <tr>
+                <th>Documentos</th>
                 <td><div style="right: 10px; text-align:right" id="rating_2" data-hash="0xf3b0f0979bfa741f264e31acb590ac8662e7616b6869078b90420c6f7908a053" data-area="39,,70,">
             
               <?php
-            if ($count3<>0) {
+            if ($count<>0) {
             ?>
-            <a title="Mark this example as good" href="#" class="rating-up btn btn-success glyphicon glyphicon-thumbs-up" data-id="rating_2"></a>
+               <button class="btn btn-icon waves-effect waves-light btn-success m-b-5"> <i class="fa fa-thumbs-o-up"></i> </button>
             <?php
                 # code...
             } else {
             ?>
 
-            <a title="Mark this example as bad" href="#" class="rating-down btn btn-danger glyphicon glyphicon-thumbs-down" data-id="rating_2"></a>
+           <button class="btn btn-icon waves-effect waves-light btn-danger m-b-5"> <i class="fa fa-thumbs-o-down"></i> </button>
 
             <?php
               }
@@ -143,26 +174,8 @@ $this->params['breadcrumbs'][] = $this->title;*/
         </div></td>
             </tr>
 
-            <tr>
-                <th>Info de Usuario</th>
-                <td><div style="right: 10px; text-align:right" id="rating_2" data-hash="0xf3b0f0979bfa741f264e31acb590ac8662e7616b6869078b90420c6f7908a053" data-area="39,,70,">
-            
-              <?php
-            if ($count3<>0) {
-            ?>
-            <a title="Mark this example as good" href="#" class="rating-up btn btn-success glyphicon glyphicon-thumbs-up" data-id="rating_2"></a>
-            <?php
-                # code...
-            } else {
-            ?>
+           
 
-            <a title="Mark this example as bad" href="#" class="rating-down btn btn-danger glyphicon glyphicon-thumbs-down" data-id="rating_2"></a>
-
-            <?php
-              }
-             ?>
-        </div></td>
-            </tr>
 
 
            
@@ -172,25 +185,26 @@ $this->params['breadcrumbs'][] = $this->title;*/
         </table>
 
                 <div class="clearfix">
-                    <span class="pull-left">Disponibilidad</span>
+                    <span class="pull-left">Informacion Completada</span>
                     <small class="pull-right">42%</small>
                 </div>
                 <div class="progress sm" style="background-color:#efefef">
                     <div style="width: 42%;" class="progress-bar progress-bar-green"></div>
                 </div>
 
-                                    <a id="export-pdf" class="btn btn-app" href="/employee/emp-master/emp-profile-pdf?id=20" target="blank"><i class="fa fa-file-pdf-o"></i> Profile PDF</a>                
-                                    <a class="btn btn-app" href="/hr/employee-attendance/view?id=20" target="_blank"><i class="fa fa-hand-o-up"></i> Attendance</a>                
-                                    <a class="btn btn-app" href="/timetable/timetable-details/employee-timetable?id=20" target="_blank"><i class="fa fa-calendar-o"></i> Timetable</a>                
+                                    <a id="export-pdf" class="btn btn-app" href="/employee/emp-master/emp-profile-pdf?id=20" target="blank"><i class="fa fa-file-pdf-o"></i> Imprimir Perfil de Usuario PDF</a>                
+                                   <!-- <a class="btn btn-app" href="/hr/employee-attendance/view?id=20" target="_blank"><i class="fa fa-hand-o-up"></i> Attendance</a>                
+                                    <a class="btn btn-app" href="/timetable/timetable-details/employee-timetable?id=20" target="_blank"><i class="fa fa-calendar-o"></i> Timetable</a>    -->             
             </div>
         </div>
     </div>
  
     <div class="col-lg-9 profile-data">
         <ul class="nav nav-tabs responsive" id = "profileTab">
-            <li class="active" id = "personal-tab"><a href="#personal" data-toggle="tab"><i class="fa fa-street-view"></i>Datos Profesor</a></li>
-            <li id = "guardians-tab"><a href="#guardians" data-toggle="tab"><i class="fa fa-file-text"></i>Datos Personales</a></li>
-             <li id = "address-tab"><a href="#address" data-toggle="tab"><i class="fa fa-file-text"></i>Domicilio</a></li>
+            <li  class="<?=$muestra1?>" id = "personal-tab"><a href="#personal" data-toggle="tab"><i class="fa fa-street-view"></i>Datos Profesor</a></li>
+            <li class="<?=$muestra2?>" id = "guardians-tab"><a href="#guardians" data-toggle="tab"><i class="fa fa-file-text"></i>Datos Personales</a></li>
+             <li class="<?=$muestra3?>" id = "address-tab"><a href="#address" data-toggle="tab"><i class="fa fa-file-text"></i>Domicilio</a></li>
+              <li class="<?=$muestra4?>" id = "docs-tab"><a href="#docs" data-toggle="tab"><i class="fa fa-file-text"></i>Documentos</a></li>
             <?php  
            /*   if(Yii::$app->user->can('modTelecom')) {  */
             ?>
@@ -213,16 +227,20 @@ $this->params['breadcrumbs'][] = $this->title;*/
             
         </ul>
          <div id='content' class="tab-content responsive">
-            <div class="tab-pane active" id="personal">
+            <div class="tab-pane  <?=$muestra1?>" id="personal">
                 <?= $this->render('_tab_dp', ['model' => $model]) ?> 
             </div>
 
-             <div class="tab-pane" id="guardians">
+             <div class="tab-pane <?=$muestra2?>" id="guardians">
                  <?= $this->render('_tab_dpprof', ['count' => $count, 'model' => $model]) ?>  
             </div>
 
-             <div class="tab-pane" id="address">
+             <div class="tab-pane <?=$muestra3?>" id="address">
                 <?= $this->render('_tab_dom', ['count2' => $count2, 'model' => $model]) ?>  
+            </div>
+
+            <div class="tab-pane <?=$muestra4?>" id="docs">
+                <?= $this->render('_tab_doc', ['count3' => $count3, 'model' => $model]) ?>  
             </div>
             <div class="tab-pane" id="telecom">
                 <?//= $this->render('_tab_telecom', ['count' => $count, 'info' => $info, 'model' => $model]) ?> 

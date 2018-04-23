@@ -32,7 +32,7 @@ use yii\helpers\ArrayHelper;
 
     <?= $form->field($model, 'cp')->textInput() ?>
 
-    <?= $form->field($model, 'status')->textInput() ?>
+
 
     <?= $form->field($model, 'observaciones')->textInput() ?>
 

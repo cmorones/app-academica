@@ -3,18 +3,19 @@
 namespace app\modules\academica\controllers;
 
 use Yii;
-use app\modules\academica\models\InvDatosprof;
-use app\modules\academica\models\InvDatosprofSearch;
+use app\modules\academica\models\InvDoctos;
+use app\modules\academica\models\InvDoctosSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
+use yii\web\UploadedFile;
 use yii\db\Expression;
 use yii\helpers\Url;
-
 /**
- * InvDatosprofController implements the CRUD actions for InvDatosprof model.
+ * InvDoctosController implements the CRUD actions for InvDoctos model.
  */
-class InvDatosprofController extends Controller
+class InvDoctosController extends Controller
 {
     /**
      * @inheritdoc
@@ -22,6 +23,17 @@ class InvDatosprofController extends Controller
     public function behaviors()
     {
         return [
+               'access' => [
+                'class' => AccessControl::className(),
+               // 'only' => ['logout'],
+                'rules' => [
+                    [
+                        'actions' => ['index','create','view','update','docto','pdf'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
@@ -32,12 +44,12 @@ class InvDatosprofController extends Controller
     }
 
     /**
-     * Lists all InvDatosprof models.
+     * Lists all InvDoctos models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new InvDatosprofSearch();
+        $searchModel = new InvDoctosSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -47,7 +59,7 @@ class InvDatosprofController extends Controller
     }
 
     /**
-     * Displays a single InvDatosprof model.
+     * Displays a single InvDoctos model.
      * @param integer $id
      * @return mixed
      */
@@ -59,35 +71,34 @@ class InvDatosprofController extends Controller
     }
 
     /**
-     * Creates a new InvDatosprof model.
+     * Creates a new InvDoctos model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate($id)
     {
-        $model = new InvDatosprof();
+        $model = new InvDoctos();
 
-        if ($model->load(Yii::$app->request->post())) {
-
-            $model->id_prof=$id;
-            $model->created_by= Yii::$app->user->identity->user_id;
+        if ($model->load(Yii::$app->request->post()) ) {
+             $model->id_prof=$id;
+            $model->created_by=Yii::$app->user->identity->user_id;
             $model->created_at = new Expression('NOW()');
-          
-           
+            $model->fecha_reg = new Expression('NOW()');
+            $model->file = UploadedFile::getInstance($model,'file');
+            $model->file->saveAs('docs_dtis/'.$model->file->baseName.'-'.date('Y-m-d h:m:s').'.'.$model->file->extension);
+       //  $model->file->saveAs('uploads/' . $this->imageFile->baseName . '.' . $this->imageFile->extension);
+        $model->docto = $model->file->baseName.'-'.date('Y-m-d h:m:s').'.'.$model->file->extension;
+         
+            //$model->updated_by=1;
             if (!$model->save()) {
                 echo "<pre>";
                 print_r($model->getErrors());
                 exit;
-                # code...
+                # code...Url::to(['post/view', 'id' => 100, '#' => 'content']);
             }
-
-        
-
-               return $this->redirect(Url::to(['/academica/inv-profesores/view', 'id' => $model->id_prof,'active' => 2, '#' => 'docs']));
-
-
-
-           // return $this->redirect(['view', 'id' => $model->id]);
+          //  return $this->redirect(['/academica/inv-profesores/view', 'id' => $model->id_prof]);
+            return $this->redirect(Url::to(['/academica/inv-profesores/view', 'id' => $model->id_prof,'active' => 4, '#' => 'docs']));
+            
         } else {
             return $this->renderAjax('create', [
                 'model' => $model,
@@ -96,39 +107,26 @@ class InvDatosprofController extends Controller
     }
 
     /**
-     * Updates an existing InvDatosprof model.
+     * Updates an existing InvDoctos model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
      */
-      
-    public function actionUpdate($id,$ide)
+    public function actionUpdate($id)
     {
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-
-            $model->updated_at = new Expression('NOW()');
-            $model->updated_by= Yii::$app->user->identity->user_id;
-             if (!$model->save()) {
-                echo "<pre>";
-                print_r($model->getErrors());
-                exit;
-                # code...
-            }
-
-               return $this->redirect(Url::to(['/academica/inv-profesores/view', 'id' => $model->id_prof,'active' => 2, '#' => 'docs']));
-            // return $this->redirect(['/soporte/inv-equipos/view', 'id' => $ide, '#' =>'telecom']);
-            //return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['view', 'id' => $model->id]);
         } else {
-            return $this->renderAjax('update', [
+            return $this->render('update', [
                 'model' => $model,
             ]);
         }
     }
 
     /**
-     * Deletes an existing InvDatosprof model.
+     * Deletes an existing InvDoctos model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -141,15 +139,15 @@ class InvDatosprofController extends Controller
     }
 
     /**
-     * Finds the InvDatosprof model based on its primary key value.
+     * Finds the InvDoctos model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return InvDatosprof the loaded model
+     * @return InvDoctos the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = InvDatosprof::findOne($id)) !== null) {
+        if (($model = InvDoctos::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

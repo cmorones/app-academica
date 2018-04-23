@@ -9,6 +9,7 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\db\Expression;
+use yii\helpers\Url;
 
 /**
  * InvDomiciliosController implements the CRUD actions for InvDomicilios model.
@@ -72,6 +73,7 @@ class InvDomiciliosController extends Controller
             $model->created_by=Yii::$app->user->identity->user_id;
             $model->created_at = new Expression('NOW()');
             $model->fecha_reg = new Expression('NOW()');
+            $model->status = '1';
          
             //$model->updated_by=1;
             if (!$model->save()) {
@@ -80,9 +82,9 @@ class InvDomiciliosController extends Controller
                 exit;
                 # code...
             }
-            return $this->redirect(['/academica/inv-profesores/view', 'id' => $model->id_prof]);
+             return $this->redirect(Url::to(['/academica/inv-profesores/view', 'id' => $model->id_prof,'active' => 3, '#' => 'docs']));
         } else {
-            return $this->render('create', [
+            return $this->renderAjax('create', [
                 'model' => $model,
             ]);
         }

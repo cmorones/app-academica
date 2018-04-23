@@ -5,19 +5,16 @@ namespace app\modules\academica\models;
 use Yii;
 
 /**
- * This is the model class for table "inv_datosprof".
+ * This is the model class for table "inv_convocatorias".
  *
  * @property integer $id
- * @property integer $id_prof
- * @property string $fecha_nac
- * @property string $lugar_nac
- * @property string $rfc
- * @property string $curp
- * @property integer $edad
- * @property integer $estado_civil
- * @property string $telefono
- * @property string $celular
- * @property string $observaciones
+ * @property integer $id_anio
+ * @property integer $id_semestre
+ * @property string $fecha_reg
+ * @property string $fecha_ini
+ * @property string $fecha_fin
+ * @property string $docto
+ * @property integer $status
  * @property string $created_at
  * @property integer $created_by
  * @property string $updated_at
@@ -26,14 +23,14 @@ use Yii;
  * @property Users $createdBy
  * @property Users $updatedBy
  */
-class InvDatosprof extends \yii\db\ActiveRecord
+class InvConvocatorias extends \yii\db\ActiveRecord
 {
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
-        return 'inv_datosprof';
+        return 'inv_convocatorias';
     }
 
     /**
@@ -42,10 +39,10 @@ class InvDatosprof extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id_prof', 'edad', 'estado_civil', 'created_by', 'updated_by'], 'integer'],
-            [['fecha_nac', 'created_at', 'updated_at'], 'safe'],
-            [['lugar_nac', 'rfc', 'curp', 'telefono', 'celular', 'observaciones'], 'string'],
-            [['lugar_nac', 'rfc', 'curp', 'telefono', 'celular','edad', 'estado_civil','fecha_nac','created_at', 'created_by'], 'required'],
+            [['id_anio', 'id_semestre', 'status', 'created_by', 'updated_by'], 'integer'],
+            [['fecha_reg', 'fecha_ini', 'fecha_fin', 'created_at', 'updated_at'], 'safe'],
+            [['docto'], 'string'],
+            [['created_at', 'created_by'], 'required'],
             [['created_by'], 'exist', 'skipOnError' => true, 'targetClass' => Users::className(), 'targetAttribute' => ['created_by' => 'user_id']],
             [['updated_by'], 'exist', 'skipOnError' => true, 'targetClass' => Users::className(), 'targetAttribute' => ['updated_by' => 'user_id']],
         ];
@@ -58,16 +55,13 @@ class InvDatosprof extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'id_prof' => 'Id Prof',
-            'fecha_nac' => 'Fecha Nacimiento',
-            'lugar_nac' => 'Lugar Nacimiento',
-            'rfc' => 'RFC',
-            'curp' => 'Curp',
-            'edad' => 'Edad',
-            'estado_civil' => 'Estado Civil',
-            'telefono' => 'Telefono',
-            'celular' => 'Celular',
-            'observaciones' => 'Observaciones',
+            'id_anio' => 'Id Anio',
+            'id_semestre' => 'Id Semestre',
+            'fecha_reg' => 'Fecha Reg',
+            'fecha_ini' => 'Fecha Ini',
+            'fecha_fin' => 'Fecha Fin',
+            'docto' => 'Docto',
+            'status' => 'Status',
             'created_at' => 'Created At',
             'created_by' => 'Created By',
             'updated_at' => 'Updated At',

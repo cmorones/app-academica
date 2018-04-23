@@ -3,6 +3,8 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use kartik\date\DatePicker;
+use app\modules\academica\models\EstadoCivil;
+use yii\helpers\ArrayHelper;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\academica\models\InvDatosprof */
@@ -35,7 +37,10 @@ use kartik\date\DatePicker;
 
     <?= $form->field($model, 'edad')->textInput() ?>
 
-    <?= $form->field($model, 'estado_civil')->textInput() ?>
+ 
+
+       <?= $form->field($model, 'estado_civil', ['inputOptions'=>[ 'class'=>'form-control'] ] )->dropDownList(ArrayHelper::map(EstadoCivil::find()->all(), 'id', 'nombre'), ['prompt'=>'Selecciona']); ?>
+
 
     <?= $form->field($model, 'telefono')->textInput() ?>
 

@@ -46,7 +46,7 @@ class InvDomicilios extends \yii\db\ActiveRecord
             [['id_prof', 'delegacion', 'estado', 'created_by', 'updated_by'], 'integer'],
             [['fecha_reg', 'created_at', 'updated_at'], 'safe'],
             [['calle', 'num_int', 'num_ext', 'colonia', 'cp', 'status', 'observaciones'], 'string'],
-            [['created_at', 'created_by'], 'required'],
+            [[ 'delegacion', 'estado','calle', 'num_int', 'num_ext', 'colonia', 'cp','created_at', 'created_by'], 'required'],
             [['created_by'], 'exist', 'skipOnError' => true, 'targetClass' => Users::className(), 'targetAttribute' => ['created_by' => 'user_id']],
             [['updated_by'], 'exist', 'skipOnError' => true, 'targetClass' => Users::className(), 'targetAttribute' => ['updated_by' => 'user_id']],
         ];

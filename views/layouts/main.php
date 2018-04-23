@@ -157,6 +157,23 @@ if (Yii::$app->controller->action->id === 'login') {
     
             }
 
+            $(function(){
+ $('#modalButton').click(function(){
+  $('#modal').modal('show')
+   .find('#modalContent')
+   .load($(this).attr('value'));
+ });
+});
+
+
+  $(document).ready(function () {
+    $.fn.modal.Constructor.prototype.enforceFocus = function () {
+    if (console && console.log) {
+        console.log("patched");
+    }
+};
+});
+
         </script>
     </html>
     <?php $this->endPage() ?>
