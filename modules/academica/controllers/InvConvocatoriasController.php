@@ -5,9 +5,14 @@ namespace app\modules\academica\controllers;
 use Yii;
 use app\modules\academica\models\InvConvocatorias;
 use app\modules\academica\models\InvConvocatoriasSearch;
+use app\modules\academica\models\CatSemestre;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
+use yii\db\Expression;
+use yii\web\UploadedFile;
+use yii\helpers\Url;
 
 /**
  * InvConvocatoriasController implements the CRUD actions for InvConvocatorias model.
@@ -20,6 +25,17 @@ class InvConvocatoriasController extends Controller
     public function behaviors()
     {
         return [
+            'access' => [
+                'class' => AccessControl::className(),
+               // 'only' => ['logout'],
+                'rules' => [
+                    [
+                        'actions' => ['index','create','view','update','docto','pdf','semestres'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
@@ -65,8 +81,23 @@ class InvConvocatoriasController extends Controller
     {
         $model = new InvConvocatorias();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post())) {
+            $model->created_by=Yii::$app->user->identity->user_id;
+            $model->created_at = new Expression('NOW()');
+           // $model->fecha_reg = new Expression('NOW()');
+            $model->file = UploadedFile::getInstance($model,'file');
+            $model->file->saveAs('docs_convocatorias/'.$model->file->baseName.'-'.date('Y-m-d h:m:s').'.'.$model->file->extension);
+       //  $model->file->saveAs('uploads/' . $this->imageFile->baseName . '.' . $this->imageFile->extension);
+        $model->docto = $model->file->baseName.'-'.date('Y-m-d h:m:s').'.'.$model->file->extension;
+         
+            //$model->updated_by=1;
+            if (!$model->save()) {
+                echo "<pre>";
+                print_r($model->getErrors());
+                exit;
+                # code...Url::to(['post/view', 'id' => 100, '#' => 'content']);
+            }
+            return $this->redirect(['index', 'id' => $model->id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -84,8 +115,26 @@ class InvConvocatoriasController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post())) {
+
+            $model->updated_by=Yii::$app->user->identity->user_id;
+            $model->updated_at = new Expression('NOW()');
+           // $model->fecha_reg = new Expression('NOW()');
+            $model->file = UploadedFile::getInstance($model,'file');
+            $model->file->saveAs('docs_convocatorias/'.$model->file->baseName.'-'.date('Y-m-d h:m:s').'.'.$model->file->extension);
+       //  $model->file->saveAs('uploads/' . $this->imageFile->baseName . '.' . $this->imageFile->extension);updated_at
+
+        $model->docto = $model->file->baseName.'-'.date('Y-m-d h:m:s').'.'.$model->file->extension;
+         
+            //$model->updated_by=1;
+            if (!$model->save()) {
+                echo "<pre>";
+                print_r($model->getErrors());
+                exit;
+                # code...Url::to(['post/view', 'id' => 100, '#' => 'content']);
+            }
+           // return $this->redirect(['index', 'id' => $model->id]);
+            return $this->redirect(['index', 'id' => $model->id]);
         } else {
             return $this->render('update', [
                 'model' => $model,
@@ -119,6 +168,20 @@ class InvConvocatoriasController extends Controller
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
+        }
+    }
+
+      public function actionSemestres($id)
+    {
+        $cuentaSemestres = CatSemestre::find()->where(['id_anio'=>$id])->count();
+        $sem = CatSemestre::find()->where(['id_anio'=>$id])->all();
+
+        if ($cuentaSemestres > 0) {
+            foreach ($sem as $key => $value) {
+                echo "<option value=". $value->id . ">". $value->nombre. "</option>";
+            }
+        }else{
+            echo "<option>-</option>";
         }
     }
 }

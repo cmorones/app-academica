@@ -132,7 +132,7 @@ Yii::$app->name = "APP";
                                   <ul class="submenu">
 
                                    <li>
-                            <?= Html::a('<i class="fa  md-add"></i> Mostrar Convocatorias',['/ventas/inv-productos']) ?>
+                            <?= Html::a('<i class="fa  md-add"></i> Mostrar Convocatorias',['/academica/inv-convocatorias']) ?>
                         </li>
                                       <li>
                             <?= Html::a('<i class="fa  md-add"></i> Agregar Convocatorias',['/ventas/inv-entradas']) ?>

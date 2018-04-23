@@ -10,12 +10,18 @@ $this->params['breadcrumbs'][] = ['label' => 'Inv Convocatorias', 'url' => ['ind
 $this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'Update';
 ?>
-<div class="inv-convocatorias-update">
+<div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Modificar Convocatorias</h3>
+                            </div>
+                            <div class="panel-body">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+
+
 
     <?= $this->render('_form', [
         'model' => $model,
     ]) ?>
 
+</div>
 </div>

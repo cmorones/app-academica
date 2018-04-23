@@ -28,6 +28,8 @@ class InvConvocatorias extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
+    public $file;
+
     public static function tableName()
     {
         return 'inv_convocatorias';
@@ -42,7 +44,8 @@ class InvConvocatorias extends \yii\db\ActiveRecord
             [['id_anio', 'id_semestre', 'status', 'created_by', 'updated_by'], 'integer'],
             [['fecha_reg', 'fecha_ini', 'fecha_fin', 'created_at', 'updated_at'], 'safe'],
             [['docto'], 'string'],
-            [['created_at', 'created_by'], 'required'],
+             [['file'], 'file'],
+            [['id_anio', 'id_semestre','fecha_reg', 'fecha_ini', 'fecha_fin','created_at', 'created_by'], 'required'],
             [['created_by'], 'exist', 'skipOnError' => true, 'targetClass' => Users::className(), 'targetAttribute' => ['created_by' => 'user_id']],
             [['updated_by'], 'exist', 'skipOnError' => true, 'targetClass' => Users::className(), 'targetAttribute' => ['updated_by' => 'user_id']],
         ];
@@ -55,17 +58,18 @@ class InvConvocatorias extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'id_anio' => 'Id Anio',
-            'id_semestre' => 'Id Semestre',
-            'fecha_reg' => 'Fecha Reg',
-            'fecha_ini' => 'Fecha Ini',
-            'fecha_fin' => 'Fecha Fin',
-            'docto' => 'Docto',
-            'status' => 'Status',
+            'id_anio' => 'Año',
+            'id_semestre' => 'Semestre',
+            'fecha_reg' => 'Fecha de Publicación',
+            'fecha_ini' => 'Fecha de Inicio de Convocatoria',
+            'fecha_fin' => 'Fecha de Termino de Convocatoria',
+            'docto' => 'Documento',
+            'status' => 'Estado',
             'created_at' => 'Created At',
             'created_by' => 'Created By',
             'updated_at' => 'Updated At',
             'updated_by' => 'Updated By',
+            'file' => 'Documento Convocatoria',
         ];
     }
 
@@ -83,5 +87,20 @@ class InvConvocatorias extends \yii\db\ActiveRecord
     public function getUpdatedBy()
     {
         return $this->hasOne(Users::className(), ['user_id' => 'updated_by']);
+    }
+
+      public function getAnios()
+    {
+        return $this->hasOne(CatAnos::className(),['id'=>'id_anio']);
+    }
+
+      public function getSemestre()
+    {
+        return $this->hasOne(CatSemestre::className(),['id'=>'id_semestre']);
+    }
+
+     public function getEstado()
+    {
+        return $this->hasOne(CatEstado::className(),['id'=>'status']);
     }
 }
