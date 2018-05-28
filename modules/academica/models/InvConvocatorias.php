@@ -41,11 +41,11 @@ class InvConvocatorias extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id_anio', 'id_semestre', 'status', 'created_by', 'updated_by'], 'integer'],
+            [['id_anio', 'id_semestre', 'id_tipo', 'status', 'created_by', 'updated_by'], 'integer'],
             [['fecha_reg', 'fecha_ini', 'fecha_fin', 'created_at', 'updated_at'], 'safe'],
-            [['docto'], 'string'],
+            [['docto','descripcion'], 'string'],
              [['file'], 'file'],
-            [['id_anio', 'id_semestre','fecha_reg', 'fecha_ini', 'fecha_fin','created_at', 'created_by'], 'required'],
+            [['status','id_anio', 'id_semestre','fecha_reg', 'fecha_ini', 'fecha_fin','created_at', 'created_by', 'file','descripcion'], 'required'],
             [['created_by'], 'exist', 'skipOnError' => true, 'targetClass' => Users::className(), 'targetAttribute' => ['created_by' => 'user_id']],
             [['updated_by'], 'exist', 'skipOnError' => true, 'targetClass' => Users::className(), 'targetAttribute' => ['updated_by' => 'user_id']],
         ];
@@ -70,6 +70,7 @@ class InvConvocatorias extends \yii\db\ActiveRecord
             'updated_at' => 'Updated At',
             'updated_by' => 'Updated By',
             'file' => 'Documento Convocatoria',
+            'id_tipo' => 'Tipo Convocatoria',
         ];
     }
 

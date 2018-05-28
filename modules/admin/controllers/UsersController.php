@@ -66,7 +66,7 @@ class UsersController extends Controller
         $model = new Users();
 
         if ($model->load(Yii::$app->request->post()) ) {
-            $model->id_profesor=1; 
+            
             $model->created_at=new \yii\db\Expression('NOW()');
             $model->created_by=@Yii::$app->user->identity->user_id;
             $model->is_block=1;
@@ -92,7 +92,7 @@ class UsersController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) ) {
-            $model->id_profesor=1; 
+         
             $model->updated_at=new \yii\db\Expression('NOW()');
             $model->updated_by=@Yii::$app->user->identity->user_id;
             $model->is_block=1;

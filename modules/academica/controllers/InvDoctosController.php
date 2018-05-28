@@ -80,7 +80,7 @@ class InvDoctosController extends Controller
         $model = new InvDoctos();
 
         if ($model->load(Yii::$app->request->post()) ) {
-             $model->id_prof=$id;
+            $model->id_prof=$id;
             $model->created_by=Yii::$app->user->identity->user_id;
             $model->created_at = new Expression('NOW()');
             $model->fecha_reg = new Expression('NOW()');

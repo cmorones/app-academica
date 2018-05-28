@@ -66,6 +66,8 @@ if($('#activa').prop('checked')) {
 
     <?= $form->field($model, 'mail')->textInput() ?>
 
+    <?= $form->field($model, 'id_profesor')->textInput() ?>
+
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? '<i class="fa fa-plus" aria-hidden="true"></i> Agregar Usuario ' : 'Actualizar ', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>

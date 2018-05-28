@@ -49,9 +49,9 @@ $this->params['breadcrumbs'][] = $this->title;
               'value' => 'catPlanteles.nombre',
               'filter' => yii\helpers\ArrayHelper::map(app\modules\admin\models\CatPlanteles::find()->orderBy('nombre')->asArray()->all(),'id','nombre')
             ],
-            // 'id_profesor',
+             'id_profesor',
             // 'id_periodo',
-            // 'mail',
+             'mail',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

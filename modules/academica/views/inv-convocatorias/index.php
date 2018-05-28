@@ -27,9 +27,9 @@ $this->params['breadcrumbs'][] = $this->title;
 
           //  'id',
             'fecha_reg',
-            'id_anio',
+           // 'id_anio',
              [
-             // 'attribute'=>'id_anio',
+              'attribute'=>'id_anio',
               'value' => 'anios.nombre',
               'filter' => yii\helpers\ArrayHelper::map(app\modules\academica\models\CatAnos::find()->orderBy('nombre')->asArray()->all(),'id','nombre')
             ],
@@ -40,15 +40,21 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             'fecha_ini',
             'fecha_fin',
-            'docto',
+            'descripcion',
+            [
+              'attribute'=>'status',
+              'value' => 'estado.nombre',
+              'filter' => yii\helpers\ArrayHelper::map(app\modules\academica\models\CatEstado::find()->orderBy('nombre')->asArray()->all(),'id','nombre')
+            ],
+            //'docto',
            
-                     [ 'attribute' => 'imprimir',
+                     [ 'attribute' => 'Documento',
               'filter' =>false,
               'format' => 'raw', 'value' => function($data){
 
                
                   return (Html::a('<center><span class="glyphicon glyphicon-print"></span> PDF</center>', [
-                            '/academica/inf-pdf/convs',
+                            '/academica/inv-convocatorias/pdf',
                             'id' => $data->id,
                         ], [
                             'class' => 'btn btn-success btn-sm',
@@ -67,12 +73,10 @@ $this->params['breadcrumbs'][] = $this->title;
              'class' => 'app\components\CustomActionColumn',
       'template' => '{update} ',
       'buttons' => [
-        'view' => function ($url, $model) {
-                return (Html::a('<span class="glyphicon glyphicon-search"></span>', $url, ['title' => Yii::t('app', 'View'),]));
+        'update' => function ($url, $model) {
+                return ((Yii::$app->user->can("MenuSuper")) ? Html::a('<span class="glyphicon glyphicon-search"></span>', $url, ['title' => Yii::t('app', 'update'),]) : '');
             },
-        'delete' => function ($url, $model) {
-                return ((Yii::$app->user->can("borrarEquipos")) ? Html::a('<span class="glyphicon glyphicon-remove"></span>', $url, ['title' => Yii::t('app', 'Delete'), 'data' => ['confirm' => Yii::t('app', 'estas seguro de eliminar el Equipo?'),'method' => 'post'],]) : '');
-            }
+        
       ],
             ],
         ],

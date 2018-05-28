@@ -72,6 +72,19 @@ class InvConvocatoriasController extends Controller
         ]);
     }
 
+      public function actionPdf($id) {
+
+        
+    $model = $this->findModel($id);
+
+    // This will need to be the path relative to the root of your app.
+    $filePath = '/docs_convocatorias';
+    // Might need to change '@app' for another alias
+    $completePath = Yii::getAlias('@webroot'.$filePath.'/'.$model->docto);
+
+    return Yii::$app->response->sendFile($completePath, $model->docto);
+}
+
     /**
      * Creates a new InvConvocatorias model.
      * If creation is successful, the browser will be redirected to the 'view' page.
@@ -103,6 +116,21 @@ class InvConvocatoriasController extends Controller
                 'model' => $model,
             ]);
         }
+    }
+
+      public function actionMovs($id)
+    {
+        //return $this->renderPartial('index');
+
+        $html = $this->renderPartial('/inf-pdf/movs',
+            [
+                'id'=>$id,
+                
+            ]);
+
+       // $html = "Hola Mundo";
+        $fName = "Cesar Morones_".date('Ymd_His');
+        return Yii::$app->pdf->exportData('Informe',$fName,$html);
     }
 
     /**

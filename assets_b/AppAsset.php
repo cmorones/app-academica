@@ -60,6 +60,9 @@ class AppAsset extends AssetBundle
         'assets/pages/jquery.chat.js',
         'assets/pages/jquery.dashboard.js',
         'assets/pages/jquery.sweet-alert.init.js',
+        'assets/plugins/notifyjs/dist/notify.min.js',
+        'assets/plugins/notifications/notify-metro.js',
+        'assets/plugins/notifications/notifications.js'
        /* 'js/AdminLTE/app.js',
         //'//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js',
         'js/plugins/slimScroll/jquery.slimscroll.min.js',

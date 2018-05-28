@@ -36,6 +36,7 @@ class AppAssetA extends AssetBundle
         'js/bootstrap.file-input.js',
         'js/bootstrapx-clickover.js',
         'js/main.js',
+        'assets/plugins/notifications/notifications.js'
     ];
     public $jsOptions = [
             'position' => \yii\web\View::POS_HEAD

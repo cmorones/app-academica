@@ -50,7 +50,7 @@ class InvProfesoresController extends Controller
      * @param integer $id
      * @return mixed
      */
-    public function actionView($id,$active)
+    public function actionView($id)
     {
         
         $count = Yii::$app->db->createCommand('SELECT COUNT(*) FROM inv_datosprof where id_prof='.$id.'')->queryScalar();
@@ -61,7 +61,7 @@ class InvProfesoresController extends Controller
             'count' => $count,
             'count2' => $count2,
             'count3' => $count3,
-            'active' => $active
+            'active' => 1
         ]);
     }
 

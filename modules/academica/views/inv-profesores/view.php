@@ -5,7 +5,7 @@ use yii\grid\GridView;
 use yii\helpers\Url;
 use yii\helpers\ArrayHelper;
 use dosamigos\switchinput\SwitchRadio;
-
+$active = 1;
 
 if ($active==1){
   $muestra1 ='active';

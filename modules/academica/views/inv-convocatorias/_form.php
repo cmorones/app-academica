@@ -5,6 +5,7 @@ use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
 use app\modules\academica\models\CatAnos;
 use app\modules\academica\models\CatEstado;
+use app\modules\academica\models\CatConvocatorias;
 use kartik\date\DatePicker;
 
 /* @var $this yii\web\View */
@@ -18,6 +19,8 @@ use kartik\date\DatePicker;
 
   
      <?//= $form->field($model, 'id_anio', ['inputOptions'=>[ 'class'=>'form-control'] ] )->dropDownList(ArrayHelper::map(CatAnos::find()->all(), 'id', 'nombre'), ['prompt'=>'Selecciona Año']); ?>
+
+     <?= $form->field($model, 'id_tipo', ['inputOptions'=>[ 'class'=>'form-control'] ] )->dropDownList(ArrayHelper::map(CatConvocatorias::find()->all(), 'id', 'nombre'), ['prompt'=>'Selecciona Tipo de Convoctoria']); ?>
 
        <?= $form->field($model, 'id_anio', ['inputOptions'=>[ 'class'=>'form-control', 'placeholder' => 'tipo'] ] )->dropDownList(ArrayHelper::map(CatAnos::find()->orderBy(['id'=>SORT_ASC])->all(),'id','nombre'),
                                                  [
@@ -66,6 +69,8 @@ use kartik\date\DatePicker;
                     ]
                 ]);
     ?>
+
+      <?= $form->field($model, 'descripcion')->textInput() ?>
 
 
 

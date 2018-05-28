@@ -22,9 +22,9 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+          //  ['class' => 'yii\grid\SerialColumn'],
 
-          //  'id',
+            'id',
             'expediente',
             'nombre',
             'apellido_p',
@@ -77,20 +77,20 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'updated_at',
             // 'updated_by',
 
-            /* [
+             [
              'class' => 'app\components\CustomActionColumn',
       'template' => '{view} {delete}',
       'buttons' => [
         'view' => function ($url, $model) {
-                return (Html::a('<span class="glyphicon glyphicon-search"></span>', $url, ['title' => Yii::t('app', 'View'),]));
+                return (Html::a('<span class="glyphicon glyphicon-search"></span>', $url, ['title' => Yii::t('app', 'View'), 'active' => '1']));
             },
         'delete' => function ($url, $model) {
                 return ((Yii::$app->user->can("/academica/inv-prof/delete")) ? Html::a('<span class="glyphicon glyphicon-remove"></span>', $url, ['title' => Yii::t('app', 'Delete'), 'data' => ['confirm' => Yii::t('app', 'Are you sure you want to delete this item?'),'method' => 'post'],]) : '');
             }
       ],
-            ],*/
+            ],
 
-              [ 'attribute' => 'Modificar',
+            /*  [ 'attribute' => 'Modificar',
               'filter' =>false,
               'format' => 'raw', 'value' => function($data){
             
@@ -103,7 +103,7 @@ $this->params['breadcrumbs'][] = $this->title;
             
               
             }
-              ],
+              ],*/
         ],
     ]); ?>
 <?php Pjax::end(); ?></div>

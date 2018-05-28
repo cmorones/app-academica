@@ -134,13 +134,7 @@ Yii::$app->name = "APP";
                                    <li>
                             <?= Html::a('<i class="fa  md-add"></i> Mostrar Convocatorias',['/academica/inv-convocatorias']) ?>
                         </li>
-                                      <li>
-                            <?= Html::a('<i class="fa  md-add"></i> Agregar Convocatorias',['/ventas/inv-entradas']) ?>
-                        </li>
-
-                            <li>
-                            <?= Html::a('<i class="fa  md-add"></i> Bajas Convocatorias',['/ventas/inv-bajaspv']) ?>
-                        </li>
+                                      
                            
                                 </ul>
                             </li>
@@ -148,7 +142,7 @@ Yii::$app->name = "APP";
                                <li class="has-submenu">
                                 <a href="#"><i class="md  md-event-note"></i> <span> Solucitudes </span> </a>
                                   <ul class="submenu">
-                                    <li><?= Html::a('Lista de solicitudes',['/ventas/informes'])?></li>
+                                    <li><?= Html::a('Lista de solicitudes',['/academica/solicitud-prestacion'])?></li>
                                  
                                     
                                 </ul>
@@ -228,8 +222,53 @@ Yii::$app->name = "APP";
                         </li>
     <?php
                }
-            ?>
 
+               if(Yii::$app->user->can('MenuDTI')) {
+            ?>
+            
+                        <ul class="navigation-menu">
+                            <li>
+                               
+                                <?= Html::a('<i class="md md-home"></i>Tablero',['/site'])  ?>
+                            </li>
+
+                        
+
+                            <li class="has-submenu">
+                                <a href="#"><i class="md ion-plus-circled"></i> <span>Mis Datos</span> </a>
+                                  <ul class="submenu">
+                                     <li>
+                            <?= Html::a('<i class="fa  md-add"></i>Modificar mis Datoss',['/academica/inv-profesores/personal']) ?>
+                        </li>
+
+                                    
+                                </ul>
+                            </li>
+
+                            <li class="has-submenu">
+                                <a href="#"><i class="md  md-exit-to-app"></i> <span> Convocatorias </span> </a>
+                                  <ul class="submenu">
+
+                                   <li>
+                            <?= Html::a('<i class="fa  md-add"></i> Mostrar Convocatorias',['/academica/inv-convocatorias']) ?>
+                        </li>
+                        </ul>
+                            </li>
+
+                            <li class="has-submenu">
+                                <a href="#"><i class="md  md-exit-to-app"></i> <span> Solicitudes </span> </a>
+                                  <ul class="submenu">
+
+                                   <li>
+                            <?= Html::a('<i class="fa  md-add"></i> Mis Solicitudes',['/academica/solicitud-prestacion/owner']) ?>
+                        </li>
+                        <li><?= Html::a('<i class="fa  md-add"></i></i>Solicitudes Activas',['/academica/solicitud-prestacion/pyt'])?></li>
+                                      
+                           
+                              <?php
+                          }
+
+                          ?>
                               
                                     
                                 </ul>
