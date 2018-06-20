@@ -36,6 +36,12 @@ $this->title = Yii::t('app', 'APP | SOPORTE');
           </div>
        <?php ActiveForm::end(); ?>
 
+       
+                     <p>- Ingresar por <?= yii\authclient\widgets\AuthChoice::widget([
+     'baseAuthUrl' => ['site/auth']
+]) ?> </p>
+
+
         <!--a href="#">I forgot my password</a--><br>
       </div><!-- /.login-box-body -->
       <?php if(\Yii::$app->session->hasFlash('loginError')) : ?>
