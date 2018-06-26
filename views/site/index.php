@@ -33,7 +33,7 @@ use app\modules\soporte\models\InvNobreak;
                         <div class="mini-stat clearfix bx-shadow bg-info">
                             <span class="mini-stat-icon"><i class="ion-social-usd"></i></span>
                             <div class="mini-stat-info text-right">
-                                <span class="counter"><?=number_format(app\modules\ventas\models\Ordenes::find()->sum('total'),2);?></span>
+                                <span class="counter"></span>
                                 Total Ventas
                             </div>
                             <div class="tiles-progress">
@@ -45,7 +45,7 @@ use app\modules\soporte\models\InvNobreak;
                         <div class="mini-stat clearfix bg-purple bx-shadow">
                             <span class="mini-stat-icon"><i class="ion-ios7-cart"></i></span>
                             <div class="mini-stat-info text-right">
-                                <span class="counter"><?=app\modules\ventas\models\Ordenes::find()->where(['status'=>1])->count(); ?></span>
+                                <span class="counter"></span>
                                Ordenes pendietes
                             </div>
                             <div class="tiles-progress">
@@ -58,7 +58,7 @@ use app\modules\soporte\models\InvNobreak;
                         <div class="mini-stat clearfix bg-primary bx-shadow">
                             <span class="mini-stat-icon"><i class="ion-android-contacts"></i></span>
                             <div class="mini-stat-info text-right">
-                                <span class="counter"><?=app\modules\ventas\models\Ordenes::find()->where(['status'=>2])->count(); ?></span>
+                                <span class="counter"></span>
                                 Ordenes Pagadas 
                             </div>
                             <div class="tiles-progress">
@@ -71,7 +71,7 @@ use app\modules\soporte\models\InvNobreak;
                         <div class="mini-stat clearfix bg-success bx-shadow">
                             <span class="mini-stat-icon"><i class="ion-eye"></i></span>
                             <div class="mini-stat-info text-right">
-                                <span class="counter"><?=app\modules\ventas\models\InvProductos::find()->sum('existencia');?></span>
+                                <span class="counter"></span>
                                 Total Existencias
                             </div>
                             <div class="tiles-progress">
