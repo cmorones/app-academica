@@ -3,7 +3,7 @@
 use yii\helpers\Html; 
 use app\modules\academica\models\InvDatosprof;
 use yii\helpers\Url;
-use yii\bootstrap\Modal;
+
 
 //$adminUser = array_keys(\Yii::$app->authManager->getRolesByUser(Yii::$app->user->getId()));
 
@@ -28,13 +28,13 @@ if($count <> 0){
             	
 		?>
 
-		<?//= Html::a('<i class="fa fa-pencil-square-o"></i> '.Yii::t('app', 'Editar'), ['/academica/inv-datosprof/update', 'id' => $datosprof->id, 'ide' => $model->id, 'tab' => 'personal'], ['class' => 'btn btn-primary btn-sm', 'id' => 'update-data']) ?>
+		<?= Html::a('<i class="fa fa-pencil-square-o"></i> '.Yii::t('app', 'Editar'), ['/academica/inv-datosprof/update', 'id' => $datosprof->id, 'ide' => $model->id, 'tab' => 'personal'], ['class' => 'btn btn-primary btn-sm', 'id' => 'update-data']) ?>
 
-		 <?= Html::button('Modificar', ['value'=>Url::to(['/academica/inv-datosprof/update', 'id'=>$datosprof->id, 'ide' => $model->id]),'class' => 'btn btn-success','id'=>'modalButton']) ?>
+		 <?//= Html::button('Modificar', ['value'=>Url::to(['/academica/inv-datosprof/update', 'id'=>$datosprof->id, 'ide' => $model->id]),'class' => 'btn btn-success','id'=>'modalButton']) ?>
 	<?php }else { ?>
 
-			<?//= Html::a('<i class="fa fa-pencil-square-o"></i> '.Yii::t('app', 'Agregar'), ['/academica/inv-datosprof/create', 'id' => $model->id, 'tab' => 'personal'], ['class' => 'btn btn-primary btn-sm', 'id' => 'update-data']) ?>
-			 <?= Html::button('Agregar', ['value'=>Url::to(['/academica/inv-datosprof/create', 'id'=>$model->id]),'class' => 'btn btn-success','id'=>'modalButton1']) ?>
+			<?= Html::a('<i class="fa fa-pencil-square-o"></i> '.Yii::t('app', 'Agregar'), ['/academica/inv-datosprof/create', 'id' => $model->id, 'tab' => 'personal'], ['class' => 'btn btn-primary btn-sm', 'id' => 'update-data']) ?>
+			 <?//= Html::button('Agregar', ['value'=>Url::to(['/academica/inv-datosprof/create', 'id'=>$model->id]),'class' => 'btn btn-success','id'=>'modalButton1']) ?>
 			<?php
 		}
 
@@ -109,17 +109,5 @@ if($count <> 0){
 <?php
  } ?>
 	
-   <?php
-      Modal::begin([
-       // 'header'=>'<h4>Form</h4',
-        'id'=>'modal1',
-        'size'=>'modal-lg',
-        ]);
 
-      echo "<div id='modalContent1'></div>";
-
-      Modal::end();
-
-
-    ?>
 </div> <!---Main Row Div--->

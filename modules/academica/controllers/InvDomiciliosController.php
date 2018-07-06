@@ -84,7 +84,7 @@ class InvDomiciliosController extends Controller
             }
              return $this->redirect(Url::to(['/academica/inv-profesores/view', 'id' => $model->id_prof,'active' => 3, '#' => 'docs']));
         } else {
-            return $this->renderAjax('create', [
+            return $this->render('create', [
                 'model' => $model,
             ]);
         }

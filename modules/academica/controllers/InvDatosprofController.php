@@ -89,7 +89,7 @@ class InvDatosprofController extends Controller
 
            // return $this->redirect(['view', 'id' => $model->id]);
         } else {
-            return $this->renderAjax('create', [
+            return $this->render('create', [
                 'model' => $model,
             ]);
         }
@@ -121,7 +121,7 @@ class InvDatosprofController extends Controller
             // return $this->redirect(['/soporte/inv-equipos/view', 'id' => $ide, '#' =>'telecom']);
             //return $this->redirect(['view', 'id' => $model->id]);
         } else {
-            return $this->renderAjax('update', [
+            return $this->render('update', [
                 'model' => $model,
             ]);
         }

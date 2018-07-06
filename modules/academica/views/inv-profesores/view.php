@@ -79,18 +79,18 @@ $this->params['breadcrumbs'][] = $this->title;*/
 <div class="col-md-3">
         <div class="panel panel-default">
             <div class="panel-body">
-                <img class="center-block img-circle img-thumbnail img-responsive" src="/user/image?name=default.png" alt="No Image" style="width:100px;height:100px">                                    <a class="text-center center-block" href="/employee/emp-master/emp-photo?id=20" title="Change Profile Picture" data-target="#globalModal" data-toggle="modal" data-modal-size="modal-sm"><i class="fa fa-pencil-square" aria-hidden="true"></i> Imagen</a>                             <h4 class="profile-username text-center">
+                <img class="center-block img-circle img-thumbnail img-responsive" src="images/foto.png" alt="No Image" style="width:100px;height:100px">                                    <a class="text-center center-block" href="/employee/emp-master/emp-photo?id=20" title="Change Profile Picture" data-target="#globalModal" data-toggle="modal" data-modal-size="modal-sm"><i class="fa fa-pencil-square" aria-hidden="true"></i> Imagen</a>                             <h4 class="profile-username text-center">
                    <?=$model->nombre?>   <?=$model->apellido_p?>          </h4>
                 <h5 class="text-center">
                     
                     <?
-                   /* if ($model->estado == 1 ) {
+                   if ($model->status == 1 ) {
 
                        echo '<span class="label label-success">Funciona</span>';
                        }
                       else{
                         echo '<span class="label label-danger">No funciona</span>';
-                    }*/
+                    }
                     ?>
                 </h5>
                 <hr>
@@ -192,8 +192,8 @@ $this->params['breadcrumbs'][] = $this->title;*/
                     <div style="width: 42%;" class="progress-bar progress-bar-green"></div>
                 </div>
 
-                                    <a id="export-pdf" class="btn btn-app" href="/employee/emp-master/emp-profile-pdf?id=20" target="blank"><i class="fa fa-file-pdf-o"></i> Imprimir Perfil de Usuario PDF</a>                
-                                   <!-- <a class="btn btn-app" href="/hr/employee-attendance/view?id=20" target="_blank"><i class="fa fa-hand-o-up"></i> Attendance</a>                
+                                   <!--  <a id="export-pdf" class="btn btn-app" href="/employee/emp-master/emp-profile-pdf?id=20" target="blank"><i class="fa fa-file-pdf-o"></i> Imprimir Perfil de Usuario PDF</a>                
+                                   <a class="btn btn-app" href="/hr/employee-attendance/view?id=20" target="_blank"><i class="fa fa-hand-o-up"></i> Attendance</a>                
                                     <a class="btn btn-app" href="/timetable/timetable-details/employee-timetable?id=20" target="_blank"><i class="fa fa-calendar-o"></i> Timetable</a>    -->             
             </div>
         </div>
@@ -281,35 +281,3 @@ $this->params['breadcrumbs'][] = $this->title;*/
   </div>
 </div>
 
-<?php $this->registerJs("(function($) {
-      fakewaffle.responsiveTabs(['xs', 'sm']);
-  })(jQuery);", yii\web\View::POS_END, 'responsive-tab'); ?>
-
-
-<!--  POP UP Window for Guardian -->
-<?php
-    yii\bootstrap\Modal::begin([
-        'id' => 'guardModal',
-        'header' => "<h3>Update Guardian</h3>",
-    ]);
-    yii\bootstrap\Modal::end(); 
-?>
-<script>
-/***
-  * Start Update Gardian Jquery
-***/
-function updateGuard(stu_guard_id, sid, tab) {
-    $.ajax({
-      type:'GET',
-      url:'<?= Url::toRoute(["stu-master/update"]) ?>',
-      data: { stu_guard_id : stu_guard_id, sid : sid, tab : tab },
-      success: function(data)
-           {
-               $(".modal-content").addClass("row");
-               $('.modal-body').html(data);
-               $('#guardModal').modal();
-
-           }
-    });
-}
-</script>

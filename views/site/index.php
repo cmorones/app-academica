@@ -29,53 +29,61 @@ use app\modules\soporte\models\InvNobreak;
     ?>
   <section class="content">
        <div class="row">
-                    <div class="col-sm-6 col-lg-3">
+                   <div class="col-sm-6 col-lg-3">
                         <div class="mini-stat clearfix bx-shadow bg-info">
-                            <span class="mini-stat-icon"><i class="ion-social-usd"></i></span>
+                            <span class="mini-stat-icon"><i class="ion-android-contacts"></i></span>
                             <div class="mini-stat-info text-right">
-                                <span class="counter"></span>
-                                Total Ventas
+                                <span class="counter">15852</span>
+                                TOTAL DOCENTES
                             </div>
                             <div class="tiles-progress">
-                                
+                                <div class="m-t-20">
+                                    <h5 class="text-uppercase text-white m-0">Tramites total<span class="pull-right">235</span></h5>
+                                </div>
                             </div>
                         </div>
                     </div>
                     <div class="col-sm-6 col-lg-3">
                         <div class="mini-stat clearfix bg-purple bx-shadow">
-                            <span class="mini-stat-icon"><i class="ion-ios7-cart"></i></span>
+                            <span class="mini-stat-icon"><i class="ion-android-contacts"></i></span>
                             <div class="mini-stat-info text-right">
-                                <span class="counter"></span>
-                               Ordenes pendietes
+                                <span class="counter">3</span>
+                                CAMBIOS DE PLANTEL
                             </div>
                             <div class="tiles-progress">
-                              
+                                <div class="m-t-20">
+                                    <h5 class="text-uppercase text-white m-0">Tramites <span class="pull-right">59</span></h5>
+                                </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="col-sm-6 col-lg-3">
+                   <div class="col-sm-6 col-lg-3">
                         <div class="mini-stat clearfix bg-primary bx-shadow">
                             <span class="mini-stat-icon"><i class="ion-android-contacts"></i></span>
                             <div class="mini-stat-info text-right">
-                                <span class="counter"></span>
-                                Ordenes Pagadas 
+                                <span class="counter">100</span>
+                               DOCENTES LSGS
                             </div>
                             <div class="tiles-progress">
-                               
+                                <div class="m-t-20">
+                                    <h5 class="text-uppercase text-white m-0">Tramites <span class="pull-right">136</span></h5>
+                                </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="col-sm-6 col-lg-3">
+                  <div class="col-sm-6 col-lg-3">
                         <div class="mini-stat clearfix bg-success bx-shadow">
-                            <span class="mini-stat-icon"><i class="ion-eye"></i></span>
+                            <span class="mini-stat-icon"><i class="ion-android-contacts"></i></span>
                             <div class="mini-stat-info text-right">
-                                <span class="counter"></span>
-                                Total Existencias
+                                <span class="counter">20544</span>
+                               DOCENTES ACTIVOS
                             </div>
                             <div class="tiles-progress">
-                               
+                                <div class="m-t-20">
+                                    <h5 class="text-uppercase text-white m-0">Tramites <span class="pull-right">1026</span></h5>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -83,6 +91,8 @@ use app\modules\soporte\models\InvNobreak;
                 </div> 
 
     </section><!-- right col -->
+
+
     <?php
 }
 

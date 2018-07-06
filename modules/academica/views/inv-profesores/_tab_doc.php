@@ -21,9 +21,9 @@ use yii\helpers\Url;
 
 	
 
-			<?//= Html::a('<i class="fa fa-pencil-square-o"></i> '.Yii::t('app', 'Agregar'), ['/academica/inv-doctos/create', 'id' => $model->id, 'tab' => 'guardians'], ['class' => 'btn btn-primary btn-sm', 'id' => 'update-data']) ?>
+			<?= Html::a('<i class="fa fa-pencil-square-o"></i> '.Yii::t('app', 'Agregar'), ['/academica/inv-doctos/create', 'id' => $model->id, 'tab' => 'guardians'], ['class' => 'btn btn-primary btn-sm', 'id' => 'update-data']) ?>
 
- <?= Html::button('Agregar', ['value'=>Url::to(['/academica/inv-doctos/create', 'id'=>$model->id]),'class' => 'btn btn-success','id'=>'modalButton']) ?>
+ <?//= Html::button('Agregar', ['value'=>Url::to(['/academica/inv-doctos/create', 'id'=>$model->id]),'class' => 'btn btn-success','id'=>'modalButton']) ?>
 		<?php
 //	}
 	?>
@@ -100,7 +100,7 @@ $i++;
  } ?>
 	
           <?php
-     Modal::begin([
+    /* Modal::begin([
        // 'header'=>'<h4>Form</h4',
         'id'=>'modal',
         'size'=>'modal-lg',
@@ -110,7 +110,7 @@ $i++;
 
       Modal::end();
 
-
+*/
     ?>
 
 
