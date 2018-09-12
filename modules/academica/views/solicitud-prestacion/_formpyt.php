@@ -111,14 +111,22 @@ if($('#cambio_plantel_anterior').prop('checked')) {
  
 
        <?= $form->field($model, 'cambio_plantel_anterior')->checkbox(['id' => 'cambio_plantel_anterior']) ?>
-       <div id=cuadro11>
-           <?= $form->field($model, 'cambio_plantel_cuenta')->textInput() ?>
 
-           
 
-    <?= $form->field($model, 'fecha_inicio_cp')->textInput() ?>
+  <div id=cuadro11>
+    
+    <?= $form->field($model, 'cambio_plantel_cuenta')->textInput() ?>
+    
+ <?=  $form-> field($model, 'fecha_termino_cp')->widget(DatePicker::classname(), [
 
-    <?= $form->field($model, 'fecha_termino_cp')->textInput() ?>
+                    'options' => ['placeholder' => 'Fecha ultimo cambio'],
+                    'pluginOptions' => [
+                        'autoclose' => true,
+                        'format' => 'yyyy-mm-dd', 
+                    ]
+                ]);
+    ?>
+    
        </div>
  </div>
 

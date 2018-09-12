@@ -82,7 +82,7 @@ class SolicitudPrestacion extends \yii\db\ActiveRecord
             [['fecha_inicio', 'fecha_termino', 'fecha_inicio_ct', 'fecha_termino_ct', 'fecha_inicio_cp', 'fecha_termino_cp', 'fecha_termino_licanterior', 'created_at', 'updated_at'], 'safe'],
             [['pt_nombre', 'pt_plaza', 'pt_numemp', 'pt_turno', 'pt_areaads', 'pt_nivel', 'pt_categoria', 'pt_funcion_real', 'lsgs_otra', 'motivos', 'lcgs_justificante', 'observaciones'], 'string'],
             [['cambio_plantel_op1', 'cambio_plantel_op2', 'cambio_plantel_op3','created_at', 'created_by'], 'required'],
-            [['fecha_inicio_cp', 'fecha_termino_cp','cambio_plantel_cuenta'], 'required', 'whenClient' => "function (attribute, value) {
+            [['fecha_termino_cp','cambio_plantel_cuenta'], 'required', 'whenClient' => "function (attribute, value) {
         return $('#cambio_plantel_anterior').prop('checked');
     }"]
           
@@ -136,9 +136,9 @@ class SolicitudPrestacion extends \yii\db\ActiveRecord
             'cambio_plantel_op1' => 'Cambio Plantel Op1',
             'cambio_plantel_op2' => 'Cambio Plantel Op2',
             'cambio_plantel_op3' => 'Cambio Plantel Op3',
-            'cambio_plantel_anterior' => 'Cambio Plantel Anterior',
-            'cambio_plantel_cuenta' => 'Cambio Plantel Cuenta',
-            'fecha_inicio_cp' => 'Fecha Inicio Cp',
+            'cambio_plantel_anterior' => 'He sido beneficiado por cambio de plantel',
+            'cambio_plantel_cuenta' => 'Indique el número de veces que ha sido beneficiado',
+            'fecha_inicio_cp' => 'Indique la fecha del ultimo cambio',
             'fecha_termino_cp' => 'Fecha Termino Cp',
             'lcgs_primeravez' => 'Lcgs Primeravez',
             'lsgs_primeravez' => 'Lsgs Primeravez',

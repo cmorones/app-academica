@@ -45,6 +45,17 @@ class SolicitudPrestacionController extends Controller
         ]);
     }
 
+    public function actionOwner()
+    {
+        $searchModel = new SolicitudPrestacionSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        return $this->render('_owner', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
        public function actionPyt()
     {
        
@@ -64,7 +75,7 @@ class SolicitudPrestacionController extends Controller
         ]);
     }
 
-    public function actionReg_pyt()
+    public function actionReg_pyt($conv,$id_tipo,$id_anio)
     {
         $model = new SolicitudPrestacion();
 
@@ -72,9 +83,16 @@ class SolicitudPrestacionController extends Controller
 
             $model->created_by=Yii::$app->user->identity->user_id;
             $model->created_at = new Expression('NOW()');
+            $model->tipo_permiso = $id_tipo;
+            $model->id_conv = $conv;
+            $model->id_platel=Yii::$app->user->identity->id_plantel;
+            $model->id_periodo= $id_anio;
+            $model->folio= $this->ultimofolio($id_anio,$id_tipo);
+            $model->estado = 1;
+            $model->id_emp = Yii::$app->user->identity->id_profesor;
 
           /*  if ($model->cambio_plantel==true) {
-                # code...
+                # code...id_profesor
             }*/
 
 
@@ -156,5 +174,19 @@ class SolicitudPrestacionController extends Controller
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
+    }
+
+
+
+    public function ultimoFolio($id_tipo,$id_anio){
+
+            $folio = \Yii::$app->db->createCommand("SELECT max(inv_convocatorias.id) as lastfolio
+            FROM inv_convocatorias   WHERE id_anio=$id_anio and id_tipo=$id_tipo")->queryOne();
+
+            if ($folio['lastfolio'] !=0 ){
+                return $folio['lastfolio']+1;
+            }else{
+                return 0+1;
+            }
     }
 }

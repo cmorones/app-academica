@@ -3,17 +3,18 @@
 namespace app\modules\academica\controllers;
 
 use Yii;
-use app\modules\academica\models\InvProfesores;
-use app\modules\academica\models\InvProfesoresSearch;
+use app\modules\academica\models\InvExperiencia;
+use app\modules\academica\models\InvExperienciaSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\db\Expression;
+use yii\helpers\Url;
 
 /**
- * InvProfesoresController implements the CRUD actions for InvProfesores model.
+ * InvExperienciaController implements the CRUD actions for InvExperiencia model.
  */
-class InvProfesoresController extends Controller
+class InvExperienciaController extends Controller
 {
     /**
      * @inheritdoc
@@ -31,12 +32,12 @@ class InvProfesoresController extends Controller
     }
 
     /**
-     * Lists all InvProfesores models.
+     * Lists all InvExperiencia models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new InvProfesoresSearch();
+        $searchModel = new InvExperienciaSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -46,66 +47,42 @@ class InvProfesoresController extends Controller
     }
 
     /**
-     * Displays a single InvProfesores model.
+     * Displays a single InvExperiencia model.
      * @param integer $id
      * @return mixed
      */
     public function actionView($id)
     {
-        
-        $count = Yii::$app->db->createCommand('SELECT COUNT(*) FROM inv_datosprof where id_prof='.$id.'')->queryScalar();
-        $count2 = Yii::$app->db->createCommand('SELECT COUNT(*) FROM inv_domicilios where id_prof='.$id.'')->queryScalar();
-        $count3 = Yii::$app->db->createCommand('SELECT COUNT(*) FROM inv_doctos where id_prof='.$id.'')->queryScalar();
         return $this->render('view', [
             'model' => $this->findModel($id),
-            'count' => $count,
-            'count2' => $count2,
-            'count3' => $count3,
-            'active' => 1
         ]);
     }
-
-       public function actionPersonal()
-    {
-        $id = Yii::$app->user->identity->id_profesor;
-     
-    $count = Yii::$app->db->createCommand('SELECT COUNT(*) FROM inv_datosprof where id_prof='.$id.'')->queryScalar();
-        $count2 = Yii::$app->db->createCommand('SELECT COUNT(*) FROM inv_domicilios where id_prof='.$id.'')->queryScalar();
-        $count3 = Yii::$app->db->createCommand('SELECT COUNT(*) FROM inv_doctos where id_prof='.$id.'')->queryScalar();
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-            'count' => $count,
-            'count2' => $count2,
-            'count3' => $count3,
-            'active' => 1
-        ]);
-    }
-
 
     /**
-     * Creates a new InvProfesores model.
+     * Creates a new InvExperiencia model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate()
+    public function actionCreate($id)
     {
-        $model = new InvProfesores();
-        $model->created_by=Yii::$app->user->identity->user_id;
-        $model->created_at = new Expression('NOW()');
-        $model->status=1;
+        $model = new InvExperiencia();
 
-
-
-        if ($model->load(Yii::$app->request->post())) {
+        if ($model->load(Yii::$app->request->post()) ) {
+            $model->id_prof=$id;
+            $model->created_by=Yii::$app->user->identity->user_id;
+            $model->created_at = new Expression('NOW()');
+            $model->fecha_reg = new Expression('NOW()');
+            $model->estado = '1';
+            
 
              if (!$model->save()) {
                 echo "<pre>";
                 print_r($model->getErrors());
                 exit;
-                }
+                # code...
+            }
 
-
-            return $this->redirect(['index', 'id' => $model->id]);
+             return $this->redirect(Url::to(['/academica/inv-profesores/view', 'id' => $model->id_prof,'active' => 5, '#' => 'docs']));
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -114,7 +91,7 @@ class InvProfesoresController extends Controller
     }
 
     /**
-     * Updates an existing InvProfesores model.
+     * Updates an existing InvExperiencia model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -122,14 +99,8 @@ class InvProfesoresController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-        $model->updated_by=Yii::$app->user->identity->user_id;
-        $model->updated_at = new Expression('NOW()');
-    
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-
-
-            //return $this->redirect(['index', 'id' => $model->id]);
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [
@@ -139,7 +110,7 @@ class InvProfesoresController extends Controller
     }
 
     /**
-     * Deletes an existing InvProfesores model.
+     * Deletes an existing InvExperiencia model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -152,15 +123,15 @@ class InvProfesoresController extends Controller
     }
 
     /**
-     * Finds the InvProfesores model based on its primary key value.
+     * Finds the InvExperiencia model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return InvProfesores the loaded model
+     * @return InvExperiencia the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = InvProfesores::findOne($id)) !== null) {
+        if (($model = InvExperiencia::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

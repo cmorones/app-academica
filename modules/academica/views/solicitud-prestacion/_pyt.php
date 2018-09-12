@@ -64,7 +64,7 @@ foreach ($dom as $value) {
                                                          <td>Activa</td>
 
 
-                                                     <td><?= Html::a('<i class="fa fa-plus-square" aria-hidden="true"></i>Registrar', ['reg_pyt', 'conv' => $value['id']], ['class' => 'btn btn-primary']) ?></td>
+                                                     <td><?= Html::a('<i class="fa fa-plus-square" aria-hidden="true"></i>Registrar', ['reg_pyt', 'conv' => $value['id'], 'id_tipo' => $value['id_tipo'],'id_anio' => $value['id_anio']], ['class' => 'btn btn-primary']) ?></td>
                                                    
                                                
                                                 </tr>

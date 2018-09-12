@@ -12,6 +12,7 @@ if ($active==1){
   $muestra2 ='';
   $muestra3 = '';
   $muestra4 = '';
+  $muestra5 = '';
 
 }
 
@@ -20,6 +21,7 @@ if ($active==2){
   $muestra2 ='active';
   $muestra3 = '';
   $muestra4 = '';
+  $muestra5 = '';
   
   
 
@@ -30,6 +32,7 @@ if ($active==3){
   $muestra2 ='';
   $muestra3 = 'active';
   $muestra4 = '';
+  $muestra5 = '';
 }
 
 if ($active==4){
@@ -37,6 +40,15 @@ if ($active==4){
   $muestra2 ='';
   $muestra3 = '';
   $muestra4 = 'active';
+  $muestra5 = '';
+}
+
+if ($active==5){
+  $muestra1 ='';
+  $muestra2 ='';
+  $muestra3 = '';
+  $muestra4 = '';
+  $muestra5 = 'active';
 }
 
 //use app\assets_b\EduSecUserProfile;
@@ -64,7 +76,13 @@ $this->params['breadcrumbs'][] = $this->title;*/
         <i class="fa fa-user"></i>Información de profesores del IEMS
         <div class="<?= (Yii::$app->language == 'ar') ? 'pull-left' : 'pull-right'?>">
 
+          <?php  if(Yii::$app->user->can('menuAdmin')) {  ?>
+
             <?= Html::a('<i class="fa fa-file-pdf-o"></i> '.Yii::t('app', 'Regresar'), ['/academica/inv-profesores'], ['class' => 'btn-sm btn btn-warning', 'id' => 'export-pdf']) ?>
+
+            <?php
+          }
+          ?>
   
         </div>
     </h2>
@@ -153,6 +171,27 @@ $this->params['breadcrumbs'][] = $this->title;*/
         </div></td>
             </tr>
 
+             <tr>
+                <th>Experiencia Academica</th>
+                <td><div style="right: 10px; text-align:right" id="rating_2" data-hash="0xf3b0f0979bfa741f264e31acb590ac8662e7616b6869078b90420c6f7908a053" data-area="39,,70,">
+            
+              <?php
+            if ($count<>0) {
+            ?>
+               <button class="btn btn-icon waves-effect waves-light btn-success m-b-5"> <i class="fa fa-thumbs-o-up"></i> </button>
+            <?php
+                # code...
+            } else {
+            ?>
+
+           <button class="btn btn-icon waves-effect waves-light btn-danger m-b-5"> <i class="fa fa-thumbs-o-down"></i> </button>
+
+            <?php
+              }
+             ?>
+        </div></td>
+            </tr>
+
               <tr>
                 <th>Documentos</th>
                 <td><div style="right: 10px; text-align:right" id="rating_2" data-hash="0xf3b0f0979bfa741f264e31acb590ac8662e7616b6869078b90420c6f7908a053" data-area="39,,70,">
@@ -204,6 +243,7 @@ $this->params['breadcrumbs'][] = $this->title;*/
             <li  class="<?=$muestra1?>" id = "personal-tab"><a href="#personal" data-toggle="tab"><i class="fa fa-street-view"></i>Datos Profesor</a></li>
             <li class="<?=$muestra2?>" id = "guardians-tab"><a href="#guardians" data-toggle="tab"><i class="fa fa-file-text"></i>Datos Personales</a></li>
              <li class="<?=$muestra3?>" id = "address-tab"><a href="#address" data-toggle="tab"><i class="fa fa-file-text"></i>Domicilio</a></li>
+              <li class="<?=$muestra5?>" id = "address-tab"><a href="#exp" data-toggle="tab"><i class="fa fa-file-text"></i>Experiencia Academica</a></li>
               <li class="<?=$muestra4?>" id = "docs-tab"><a href="#docs" data-toggle="tab"><i class="fa fa-file-text"></i>Documentos</a></li>
             <?php  
            /*   if(Yii::$app->user->can('modTelecom')) {  */
@@ -238,6 +278,11 @@ $this->params['breadcrumbs'][] = $this->title;*/
              <div class="tab-pane <?=$muestra3?>" id="address">
                 <?= $this->render('_tab_dom', ['count2' => $count2, 'model' => $model]) ?>  
             </div>
+
+            <div class="tab-pane <?=$muestra5?>" id="exp">
+                <?= $this->render('_tab_ac', ['count2' => $count2, 'model' => $model]) ?>  
+            </div>
+
 
             <div class="tab-pane <?=$muestra4?>" id="docs">
                 <?= $this->render('_tab_doc', ['count3' => $count3, 'model' => $model]) ?>  
